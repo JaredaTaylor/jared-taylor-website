@@ -1,10 +1,10 @@
-import {} from './home.styles';
+import { PageContainer, Title } from './home.styles';
 
 const Home = () => {
     return (
-        <div>
-            <h2>Home Page</h2>
-        </div>
+        <PageContainer>
+            <Title>Welcome!</Title>
+        </PageContainer>
     );
 };
 

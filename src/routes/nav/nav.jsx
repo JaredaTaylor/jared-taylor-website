@@ -1,17 +1,20 @@
 import {} from './nav.styles';
 import { Outlet } from 'react-router-dom';
-import { NavContainer, NavLink, NavLinks, LogoContainer } from './nav.styles';
+import { NavContainer, NavLink, NavLinks, HomeLink } from './nav.styles';
 
 const Nav = () => {
     return (
         <>
             <NavContainer>
-                <LogoContainer to='/'>
-                    Home
-                </LogoContainer>
+                <HomeLink to='/'>
+                    Jared Taylor
+                </HomeLink>
                 <NavLinks>
                     <NavLink to='/projects'>
                         PROJECTS
+                    </NavLink>
+                    <NavLink to='/playground'>
+                        PLAYGROUND
                     </NavLink>
                 </NavLinks>
             </NavContainer>

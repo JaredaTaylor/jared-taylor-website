@@ -7,12 +7,16 @@ export const NavContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 25px;
+  background-color: black;
 `;
 
-export const LogoContainer = styled(Link)`
-  height: 100%;
-  width: 70px;
-  padding: 25px;
+export const HomeLink = styled(Link)`
+  color: white;
+  font-size: x-large;
+  padding: 5px 15px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 `;
 
 export const NavLinks = styled.div`
@@ -24,6 +28,8 @@ export const NavLinks = styled.div`
 `;
 
 export const NavLink = styled(Link)`
+  color: white;
+  font-size: medium;
   padding: 10px 15px;
   cursor: pointer;
 `;

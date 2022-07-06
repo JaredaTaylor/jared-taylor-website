@@ -1,8 +1,8 @@
-import { Name, ProjectCardContainer, GitLink, TechContainer, Technology, InfoContainer, DetailsContainer, GithubIcon, Description, FutureWork } from './project-card.styles';
+import { Name, ProjectCardContainer, GitLink, TechContainer, Technology, InfoContainer, DetailsContainer, GithubIcon, DetailsText } from './project-card.styles';
 
 
 const ProjectCard = ({project}) => {
-    const { name, githubUrl, tech } = project;
+    const { name, githubUrl, tech, description, wip, todo } = project;
 
     return (
         <ProjectCardContainer>
@@ -15,11 +15,18 @@ const ProjectCard = ({project}) => {
                     ))
                     }
                 </TechContainer>
-                {githubUrl && <GitLink to={githubUrl}><GithubIcon /></GitLink>}
+                {githubUrl && <GitLink href={ githubUrl }><GithubIcon /></GitLink>}
             </InfoContainer>
             <DetailsContainer>
-                <Description>Description:</Description>
-                <FutureWork>Future Work:</FutureWork>
+                <DetailsText>
+                    <h4>Description:</h4>
+                    <p>{ description }</p>
+                </DetailsText>
+                {wip &&
+                <DetailsText>
+                    <h4>Future Work:</h4>
+                    <p>{ todo }</p>
+                </DetailsText>}
             </DetailsContainer>
         </ProjectCardContainer>
     );

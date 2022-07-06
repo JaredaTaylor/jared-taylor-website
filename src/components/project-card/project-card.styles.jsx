@@ -1,12 +1,10 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import { FaGithub } from 'react-icons/fa';
 
 export const ProjectCardContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  height: 350px;
   align-items: center;
   position: relative;
   border-style: solid;
@@ -30,8 +28,8 @@ export const Name = styled.span`
   font-size: 18px;
   text-align: center;
   width: 90%;
-  margin-bottom: 10px;
-  margin-top: 10px;
+  margin-bottom: 5px;
+  margin-top: 8px;
   text-decoration: underline;
 `;
 
@@ -53,7 +51,7 @@ export const Technology = styled.span`
   box-shadow: 0px 2px;
 `;
 
-export const GitLink = styled(Link)`
+export const GitLink = styled.a`
   cursor: pointer;
   margin-bottom: 5px;
   margin-top: 5px;
@@ -69,12 +67,17 @@ export const DetailsContainer = styled.div`
   width: 95%;
   display: flex;
   flex-direction: column;
+  row-gap: 10px;
+  margin: 10px 0px 10px 0px;
 `;
 
-export const Description = styled.span`
-  flex-grow: 1;
-`;
-
-export const FutureWork = styled.span`
-  flex-grow: 1;
+export const DetailsText = styled.div`
+  display: flex;
+  flex-direction: column;
+  h4 {
+    margin: 0px 0px 2px 0px;
+  }
+  p {
+    margin: 0px;
+  }
 `;

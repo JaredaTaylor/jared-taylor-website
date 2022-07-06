@@ -22,9 +22,8 @@ export const InfoContainer = styled.div`
   background-color: #5555d1;
   align-items: center;
   position: relative;
-  border-style: solid;
-  border-width: 2px;
-  border-color: #5555d1;
+  padding: 0px;
+  margin: 0px;
 `;
 
 export const Name = styled.span`

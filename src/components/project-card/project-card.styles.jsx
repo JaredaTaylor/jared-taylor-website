@@ -21,7 +21,10 @@ export const InfoContainer = styled.div`
   background-color: #5555d1;
   align-items: center;
   position: relative;
-  border-radius: 10px;
+  border-style: solid;
+  border-color: #5555d1;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 `;
 
 export const Name = styled.span`

@@ -21,6 +21,8 @@ export const InfoContainer = styled.div`
   background-color: #5555d1;
   align-items: center;
   position: relative;
+  border-style: solid;
+  border-color: #5555d1;
   @media only screen and (max-width: 800px) {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;

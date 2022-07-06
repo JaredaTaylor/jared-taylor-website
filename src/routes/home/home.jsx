@@ -6,11 +6,11 @@ const Home = () => {
             <Title>Welcome!</Title>
             <BioContainer>
                 <ImageContainer>
-                    <img src='/bio-image.jpg' alt='headshot photo' />
+                    <img src='/bio-image.jpg' alt='headshot' />
                 </ImageContainer>
                 <ParagraphContainer>
                     <BioTitle>Hi, my name is Jared</BioTitle>
-                    <BioParagraph>About me.</BioParagraph>
+                    <BioParagraph>I am recent graduate from The School of Computing at Queen's University. Previously worked as a Web Developer for Juniper Cafe, currently looking for a developer role.</BioParagraph>
                 </ParagraphContainer>
             </BioContainer>
         </PageContainer>

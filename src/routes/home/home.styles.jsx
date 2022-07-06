@@ -18,15 +18,17 @@ export const BioContainer = styled.div`
 export const ParagraphContainer = styled.div`
     width: 66%;
     margin: 20px 20px 20px 0px;
+    background-color: white;
+    padding: 0px 10px;
+    border-radius: 10px;
 `;
 
 export const BioTitle = styled.h3`
-    background-color: yellow;
     margin-bottom: 10px;
 `;
 
 export const BioParagraph = styled.p`
-    background-color: pink;
+    
 `;
 
 export const ImageContainer = styled.div`

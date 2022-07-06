@@ -8,6 +8,7 @@ export const ProjectCardContainer = styled.div`
   align-items: center;
   position: relative;
   border-style: solid;
+  border-width: 4px;
   border-color: #5555d1;
   border-radius: 10px;
   outline-color: #5555d1;
@@ -21,15 +22,6 @@ export const InfoContainer = styled.div`
   background-color: #5555d1;
   align-items: center;
   position: relative;
-  border-style: solid;
-  border-color: #5555d1;
-  @media only screen and (max-width: 800px) {
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-  }
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  
 `;
 
 export const Name = styled.span`

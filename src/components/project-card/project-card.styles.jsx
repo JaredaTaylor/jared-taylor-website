@@ -21,6 +21,7 @@ export const InfoContainer = styled.div`
   background-color: #5555d1;
   align-items: center;
   position: relative;
+  border-radius: 10px;
 `;
 
 export const Name = styled.span`

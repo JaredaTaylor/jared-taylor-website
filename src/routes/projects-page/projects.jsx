@@ -1,5 +1,5 @@
 import { PageContainer, ProjectsPreview, Title } from './projects.styles';
-import { Fragment, useState, useEffect, useContext } from 'react';
+import { Fragment, useContext } from 'react';
 import { ProjectsContext } from '../../contexts/projects.context';
 import  ProjectCard from '../../components/project-card/project-card';
 

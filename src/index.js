@@ -5,13 +5,18 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { ProjectsProvider } from './contexts/projects.context';
+import { Page } from './index.styles';
+import Footer from './components/footer/footer';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <ProjectsProvider>
       <BrowserRouter>
-        <App />
+        <Page>
+          <App />
+          <Footer />
+        </Page>
       </BrowserRouter>
     </ProjectsProvider>
   </React.StrictMode>

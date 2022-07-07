@@ -1,9 +1,18 @@
 body {
   margin: 0;
-  padding: 0px 0px 20px 0px;
+  padding: 0px 0px 0px 0px;
   font-family: 'Lato', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+html, body, #root {
+  height: 100vh;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
 }
 
 code {

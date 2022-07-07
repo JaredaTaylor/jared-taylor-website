@@ -8,10 +8,11 @@ export const ProjectCardContainer = styled.div`
   align-items: center;
   position: relative;
   border-style: solid;
-  border-width: 4px;
+  border-width: 0px;
   border-color: #5555d1;
   border-radius: 10px;
   outline-color: #5555d1;
+  background-color: #5555d1;
   box-shadow: 1px 3px rgb(0 0 0 / 0.2);
 `;
 
@@ -19,7 +20,6 @@ export const InfoContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  background-color: #5555d1;
   align-items: center;
   position: relative;
   padding: 0px;
@@ -32,7 +32,7 @@ export const Name = styled.span`
   text-align: center;
   width: 90%;
   margin-bottom: 5px;
-  margin-top: 8px;
+  margin-top: 12px;
   text-decoration: underline;
 `;
 
@@ -67,11 +67,15 @@ export const GithubIcon = styled(FaGithub)`
 `;
 
 export const DetailsContainer = styled.div`
-  width: 95%;
+  flex-grow: 2;
+  background-color: white;
   display: flex;
   flex-direction: column;
   row-gap: 10px;
-  margin: 10px 0px 10px 0px;
+  padding: 10px;
+  margin: 5px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 `;
 
 export const DetailsText = styled.div`

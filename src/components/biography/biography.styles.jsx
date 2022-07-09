@@ -17,12 +17,16 @@ export const ParagraphContainer = styled.div`
     background-color: white;
     padding: 0px 10px;
     border-radius: 10px;
-    @media only screen and (min-width: 1200px) {}
+    @media only screen and (min-width: 1200px) {
+        margin: 0px;
+    }
 `;
 
 export const BioTitle = styled.h3`
     margin-bottom: 10px;
-    @media only screen and (min-width: 1200px) {}
+    @media only screen and (min-width: 1200px) {
+        text-align: center;
+    }
 `;
 
 export const BioParagraph = styled.p`
@@ -39,6 +43,8 @@ export const ImageContainer = styled.div`
         border-radius: 50%;
     }
     @media only screen and (min-width: 1200px) {
+        margin: 0px;
+        width: 25%;
         img{}
     }
 `;

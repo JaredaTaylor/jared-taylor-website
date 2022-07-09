@@ -7,12 +7,8 @@ export const ProjectCardContainer = styled.div`
   flex-direction: column;
   align-items: center;
   position: relative;
-  border-style: solid;
-  border-width: 0px;
-  border-color: #5555d1;
   border-radius: 10px;
-  outline-color: #5555d1;
-  background-color: #5555d1;
+  background-color: #55b6ee;
   box-shadow: 1px 3px rgb(0 0 0 / 0.2);
 `;
 

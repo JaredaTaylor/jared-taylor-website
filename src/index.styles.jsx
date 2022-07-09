@@ -1,7 +1,13 @@
 import styled from 'styled-components';
 
+//position: relative;
+//    min-height: 100vh;
+//    overflow: auto;
+
 export const Page = styled.div`
-    padding: 0px 0px 60px 0px;
-    position: relative;
-    height: 100vh;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
 `;

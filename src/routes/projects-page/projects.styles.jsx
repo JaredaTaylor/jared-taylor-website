@@ -14,6 +14,7 @@ export const Title = styled.h2`
 export const ProjectsContainer = styled.div`
   display: flex;
   flex-direction: column;
+  overflow: auto;
 `
 
 export const CategoryTitle = styled.h3`
@@ -32,5 +33,5 @@ export const ProjectsPreview = styled.div`
   grid-template-columns: repeat(3, 1fr);
   column-gap: 20px;
   row-gap: 20px;
-  margin-bottom: 60px;
+  margin-bottom: 20px;
 `;

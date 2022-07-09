@@ -3,27 +3,25 @@ import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 import { AiOutlineCopyrightCircle } from 'react-icons/ai'
 
 export const FooterContainer = styled.div`
-    position: fixed;
-    bottom: 0;
-    border-top-style: solid;
-    border-width: 1px;
-    border-color: #adadad;
-    width: 100%;
-    height: 40px;
-    display: flex;
-    flex-direction: row;
-    column-gap: 5%;
-    align-items: center;
-    background-color: white;
+  border-top-style: solid;
+  border-width: 1px;
+  border-color: rgb(58, 58, 58, 0.2);
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  column-gap: 5%;
+  align-items: center;
+  background-color: #55b6ee;
 `;
 
-export const InfoContainer = styled.div`
-    display: flex;
-    flex-direction: row;
-    column-gap: 5px;
-    align-items: center;
-    justify-content: flex-end;
-    width: 50%
+export const FooterContentsContainer = styled.div`
+  margin: 6px;
+  display: flex;
+  flex-direction: row;
+  column-gap: 10px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 `;
 
 export const CopyrightIcon = styled(AiOutlineCopyrightCircle)`
@@ -54,7 +52,7 @@ export const GitLink = styled.a`
 export const GithubIcon = styled(FaGithub)`
   height: 20px;
   width: 20px;
-  color: #5555d1;
+  color: white;
 `;
 
 export const LinkedinLink = styled.a`
@@ -64,6 +62,6 @@ export const LinkedinLink = styled.a`
 export const LinkedinIcon = styled(FaLinkedinIn)`
   height: 20px;
   width: 20px;
-  color: #5555d1;
+  color: white;
 `;
 

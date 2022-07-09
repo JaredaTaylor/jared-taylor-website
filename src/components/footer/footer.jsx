@@ -1,16 +1,14 @@
-import { FooterContainer, InfoContainer, CopyrightIcon, CopyrightText, LinksContainer, GitLink, GithubIcon, LinkedinLink, LinkedinIcon } from './footer.styles';
+import { FooterContainer, FooterContentsContainer, CopyrightIcon, CopyrightText, GitLink, GithubIcon, LinkedinLink, LinkedinIcon } from './footer.styles';
 
 const Footer = () => {
     return (
         <FooterContainer>
-            <InfoContainer>
+            <FooterContentsContainer>
                 <CopyrightIcon />
                 <CopyrightText>2022 Jared Taylor</CopyrightText>
-            </InfoContainer>
-            <LinksContainer>
                 <GitLink href='https://github.com/JaredaTaylor'><GithubIcon/></GitLink>
                 <LinkedinLink href='https://www.linkedin.com/in/jaredalextaylor/'><LinkedinIcon/></LinkedinLink>
-            </LinksContainer>
+            </FooterContentsContainer>
         </FooterContainer>
     );
 };

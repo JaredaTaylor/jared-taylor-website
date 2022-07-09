@@ -17,7 +17,6 @@ export const ProjectsProvider = ({ children }) => {
   useEffect(() => {
     const getProjectsMap = async () => {
       const projectMap = await getProjectsAndDocuments();
-      console.log(projectMap);
       setProjectsMap(projectMap);
     };
 

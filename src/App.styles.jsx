@@ -7,3 +7,7 @@ export const Page = styled.div`
     justify-content: space-between;
     height: 100%;
 `;
+
+export const HeaderAndContent = styled.div`
+    justify-content: center;
+`;

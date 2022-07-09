@@ -13,10 +13,7 @@ root.render(
   <React.StrictMode>
     <ProjectsProvider>
       <BrowserRouter>
-        <Page>
-          <App />
-          <Footer />
-        </Page>
+        <App />
       </BrowserRouter>
     </ProjectsProvider>
   </React.StrictMode>

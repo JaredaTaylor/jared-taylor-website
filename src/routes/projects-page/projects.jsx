@@ -3,6 +3,7 @@ import { Fragment, useContext } from 'react';
 import { ProjectsContext } from '../../contexts/projects.context';
 import  ProjectCard from '../../components/project-card/project-card';
 
+
 const Projects = () => {
 
     const { projectsMap } = useContext(ProjectsContext);

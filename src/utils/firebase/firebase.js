@@ -39,6 +39,22 @@ export const getProjectsAndDocuments = async () => {
     acc[title.toLowerCase()] = items;
     return acc;
   }, {});
+  
 
   return projectMap;
+};
+
+export const getAboutAndDocuments = async () => {
+  const collectionRef = collection(db, 'about');
+  const q = query(collectionRef);
+
+  const querySnapshot = await getDocs(q);
+  const aboutMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
+    const { title, items } = docSnapshot.data();
+    acc[title.toLowerCase()] = items;
+    return acc;
+  }, {});
+  
+
+  return aboutMap;
 };

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-export const BioContainer = styled.div`
-    display: flex;
+/*
+display: flex;
     background-color: #5555d1;
     border-radius: 10px;
     @media only screen and (min-width: 1200px) {
@@ -9,42 +9,50 @@ export const BioContainer = styled.div`
         background-color: white;
         align-items: center;
     }
-`;
-
-export const ParagraphContainer = styled.div`
-    width: 66%;
-    margin: 20px 20px 20px 0px;
+*/
+export const BioContainer = styled.div`
+    display: flex;
+    justify-content: center;
     background-color: white;
-    padding: 0px 10px;
     border-radius: 10px;
-    @media only screen and (min-width: 1200px) {
-        margin: 0px;
+    @media only screen and (max-width: 800px) {
+        flex-direction: column;
+        align-items: center;
     }
 `;
 
+/*
+margin: 20px 20px 20px 0px;
+@media only screen and (min-width: 1200px) {
+        margin: 0px;
+    }
+*/
+export const ParagraphContainer = styled.div`
+    width: 100%;
+    background-color: white;
+    padding: 0px 10px;
+    border-radius: 10px;
+    margin: 0px;
+    @media only screen and (max-width: 800px) {
+        text-align: center;
+        width: 95%;
+    }
+`;
+
+/*
+margin-bottom: 10px;
+    @media only screen and (min-width: 1200px) {
+        text-align: center;
+    }
+*/
 export const BioTitle = styled.h3`
     margin-bottom: 10px;
-    @media only screen and (min-width: 1200px) {
+    @media only screen and (max-width: 800px) {
         text-align: center;
     }
 `;
 
 export const BioParagraph = styled.p`
-    @media only screen and (min-width: 1200px) {}
-`;
-
-export const ImageContainer = styled.div`
-    width: 33%;
-    height: 50%;
-    margin: 20px;
-    img {
-        height: 100%;
-        width: 100%;
-        border-radius: 50%;
-    }
-    @media only screen and (min-width: 1200px) {
-        margin: 0px;
-        width: 25%;
-        img{}
-    }
+    text-align: justify;
+    @media only screen and (min-width: 800px) {}
 `;

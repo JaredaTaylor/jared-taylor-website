@@ -6,7 +6,7 @@ export async function executeCommand(command, pwd, args = []) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authentication': `Api-Key ${API_SECRET}`,
+      'Authorization': `Api-Key ${API_SECRET}`,
     },
     body: JSON.stringify({ pwd, args }),
   });

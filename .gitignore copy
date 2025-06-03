@@ -1,0 +1,89 @@
+# === Python ===
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# === Django ===
+*.log
+*.pot
+*.pyc
+*.sqlite3
+db.sqlite3
+media/
+staticfiles/
+local_settings.py
+.env
+*.env
+
+# === Virtual Environment ===
+venv/
+env/
+ENV/
+
+# === macOS ===
+.DS_Store
+
+# === Windows ===
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# === VS Code ===
+.vscode/
+
+# === PyCharm ===
+.idea/
+
+# === Docker ===
+*.pid
+*.seed
+*.pid.lock
+*.sock
+*.tar
+*.log
+*.bak
+
+# Ignore Docker build cache if any
+**/.docker-cache/
+docker-compose.override.yml
+
+# === Migrations (optional) ===
+# Comment this out if you want to track migrations per app
+**/migrations/*.py
+!**/migrations/__init__.py
+
+# === Test & Coverage ===
+.coverage
+.tox/
+nosetests.xml
+coverage.xml
+htmlcov/
+*.cover
+*.pytest_cache/
+.pytest_cache/
+junit.xml
+
+# === Node / Frontend === (just in case)
+node_modules/
+dist/
+build/
+
+# === Compiled Assets ===
+*.map
+
+# === Home directory content ===
+# Keep home/ files, so don't ignore them
+# home/
+
+# === Misc ===
+*.swp
+*~
+
+# React/Vite frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/.env.local
+frontend/.DS_Store

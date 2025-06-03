@@ -5,7 +5,7 @@ const ResumeViewer = () => {
   const [content, setContent] = useState('');
 
   useEffect(() => {
-    fetch('/src/assets/resume.md')
+    fetch('/assets/resume.md')
       .then((res) => res.text())
       .then((text) => setContent(text))
       .catch((err) => {

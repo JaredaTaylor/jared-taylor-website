@@ -1,12 +1,25 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import NodePolyfills from 'vite-plugin-node-polyfills'
 
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    NodePolyfills({
+      protocolImports: true,
+    }),
+  ],
   server: {
-    host: true,        // Listen on all network interfaces
-    port: 3000,        // Must match docker-compose.yml
-    strictPort: true,  // Fail if port is unavailable
+    host: true,
+    port: 3000,
+    strictPort: true,
+  },
+  resolve: {
+    alias: {
+      crypto: 'crypto-browserify',
+    },
+  },
+  define: {
+    global: 'globalThis',
   },
 })

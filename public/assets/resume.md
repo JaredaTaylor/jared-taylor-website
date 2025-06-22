@@ -6,7 +6,7 @@ Versatile software engineer with 3+ years of experience wearing multiple hats in
 
 ## Contact
 
-- ✉️ [jaredalextaylor@gmail.com](mailto:yourname@example.com)
+- ✉️ [jaredalextaylor@gmail.com](mailto:jaredalextaylor@gmail.com)
 - 🌐 [jaredtaylor.dev](https://jaredtaylor.dev)
 - 💾 [github.com/JaredaTaylor](https://github.com/JaredaTaylor)
 

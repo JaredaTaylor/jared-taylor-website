@@ -4,7 +4,25 @@ import { executeCommand } from '../api/command';
 const Terminal = () => {
   const [cwd, setCwd] = useState('/home/jaredtaylor.dev');
   const [input, setInput] = useState('');
-  const [output, setOutput] = useState([]);
+  const [output, setOutput] = useState([
+    {
+      type: 'out',
+      text: (
+        <div className="text-green-400 mb-4">
+          <p>==========================================</p>
+          <p>__        __   _                          </p>
+          <p>\ \      / /__| | ___ ___  _ __ ___   ___ </p>
+          <p> \ \ /\ / / _ \ |/ __/ _ \| '_ ` _ \ / _ \</p>
+          <p>  \ V  V /  __/ | |_| |_| | | | | | |  __/</p>
+          <p>   \_/\_/ \___|_|\___\___/|_| |_| |_|\___|</p>
+          <p>==========================================</p>
+          <p>Welcome to <strong>jaredtaylor.dev</strong> — a personal portfolio in terminal form.</p>
+          <p>Type a command to get started, or try `help` to see what is available.</p>
+          <p>If you would prefer to view my non-interactive resume, click the toggle in the top right.</p>
+        </div>
+      ),
+    },
+  ]);
   const [loading, setLoading] = useState(false);
   const inputRef = useRef(null);
   const outputEndRef = useRef(null);

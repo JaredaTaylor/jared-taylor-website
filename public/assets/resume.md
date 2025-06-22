@@ -1,6 +1,6 @@
 # Jared Taylor - Software Engineer
 
-Passionate software engineer with 3 years of industry experience in a fast-paced startup environment.
+Versatile software engineer with 3+ years of experience wearing multiple hats in a fast-paced startup—leading embedded development and architecting AWS-based cloud solutions.
 
 ---
 
@@ -16,12 +16,15 @@ Passionate software engineer with 3 years of industry experience in a fast-paced
 
 ### VXG Inc. - Software Engineer
 **October 2022 → Current**
-- Maintain and developer embedded software applications for IP cameras
-- Develop and design cloud services
-- Customer support
-- Sale engineering
-- CI/CD
-- Build systems design
+- Lead embedded systems development for IP camera platforms, maintaining and extending C/C++ firmware across multiple hardware models.
+- Architect and implement scalable cloud services to support real-time video streaming, remote device management, and data analytics using AWS, Python, and Linux-based systems.
+- Build and deploy cloud services using AWS ECS, Lambda, EC2, S3, CloudFront, and Route53, optimizing performance, availability, and cost.
+- Serve as the primary embedded and cloud integration engineer, bridging edge devices with cloud infrastructure.
+- Design and maintain CI/CD pipelines for embedded and cloud deployments, improving release cycle efficiency and reliability.
+- Develop and manage custom build systems, streamlining firmware compilation, packaging, and deployment processes.
+- Collaborate with sales and customer success teams to deliver tailored technical solutions and resolve client-specific issues as a sales/solutions engineer.
+- Provide Tier 3 technical support for key customers, identifying and resolving complex issues across embedded and cloud systems.
+- 2+ years hands-on experience with AWS tools, Linux, shell scripting, Python, C, and C++.
 
 ### Juniper Inc. - Web Developer
 **May 2020 → September 2021**

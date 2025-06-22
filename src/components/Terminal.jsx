@@ -18,7 +18,7 @@ const Terminal = () => {
           <p>==========================================</p>
           <p>Welcome to <strong>jaredtaylor.dev</strong> — a personal portfolio in terminal form.</p>
           <p>Type a command to get started, or try `help` to see what is available.</p>
-          <p>If you would prefer to view my non-interactive resume, click the toggle in the top right.</p>
+          <p>If you would prefer to view my non-interactive resume, click the toggle in the top left.</p>
         </div>
       ),
     },

@@ -47,31 +47,32 @@ const Terminal = () => {
       return;
     }
 
+    // Show command prompt
+    setOutput((prev) => [
+      ...prev,
+      {
+        type: 'cmd',
+        text: (
+          <span>
+            <span className="text-green-400">user@jaredtaylor.dev</span>
+            <span className="text-white">:</span>
+            <span className="text-blue-400">{cwd}</span>
+            <span className="text-white">$ {input}</span>
+          </span>
+        ),
+      },
+      { type: 'out', text: '▋' }, // placeholder cursor line to replace
+    ]);
+
+    setInput('');
     setLoading(true);
-
-    // Append the command line to output
-    const cmdEntry = {
-      type: 'cmd',
-      text: (
-        <span>
-          <span className="text-green-400">user@jaredtaylor.dev</span>
-          <span className="text-white">:</span>
-          <span className="text-blue-400">{cwd}</span>
-          <span className="text-white">$ {input}</span>
-        </span>
-      ),
-    };
-
-    // Append blinking cursor placeholder
-    const placeholderIndex = output.length + 1;
-    setOutput((prev) => [...prev, cmdEntry, { type: 'out', text: <span className="blinking-cursor" /> }]);
+    setIsTyping(true);
 
     try {
       const result = await executeCommand(command, cwd, args);
-      const message = result.stdout || result.stderr || '(no output)';
-
-      // Type out message replacing the blinking cursor
-      await typeOutput(message, 'out', placeholderIndex);
+      const message = result.stdout || result.stderr || 'Command failed...';
+      const indexToReplace = output.length + 1; // placeholder line index
+      await typeOutput(message, 'out', indexToReplace);
       setCwd(result.cwd);
     } catch (err) {
       let msg = err.message;
@@ -79,14 +80,10 @@ const Terminal = () => {
         const json = JSON.parse(msg.replace('Server error: ', ''));
         msg = json.error || msg;
       } catch {}
-      setOutput((prev) => {
-        const newOutput = [...prev];
-        newOutput[placeholderIndex] = { type: 'err', text: msg };
-        return newOutput;
-      });
+      setOutput((prev) => [...prev, { type: 'err', text: msg }]);
     }
 
-    setInput('');
+    setIsTyping(false);
     setLoading(false);
   };
 

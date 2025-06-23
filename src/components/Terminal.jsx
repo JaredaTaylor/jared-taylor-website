@@ -100,7 +100,11 @@ const Terminal = () => {
   // Typing out commands
   const [isTyping, setIsTyping] = useState(false);
   const typeOutput = async (text, type, indexToReplace) => {
-    const lines = text.split('\n');
+    const lines = text.split('\n').filter((line, i, arr) => {
+      // Remove final empty line caused by trailing newline
+      return !(i === arr.length - 1 && line === '');
+    });
+
     const delay = 5;
 
     for (let lineIdx = 0; lineIdx < lines.length; lineIdx++) {
@@ -116,6 +120,7 @@ const Terminal = () => {
         });
       }
 
+      // If not the last line, add a new one
       if (lineIdx < lines.length - 1) {
         indexToReplace++;
         setOutput((prev) => [...prev, { type, text: '' }]);

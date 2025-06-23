@@ -68,7 +68,10 @@ const Terminal = () => {
             </span>
           ),
         },
-        { type: 'out', text: '▋' },
+        {
+          type: 'out',
+          text: <span className="blinking-cursor" />
+        },
       ];
       indexToReplace = newOutput.length - 1; // correct position of '▋'
       return newOutput;

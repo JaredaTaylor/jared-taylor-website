@@ -49,85 +49,41 @@ const Terminal = () => {
 
     setLoading(true);
 
-    // Append the user command line
-    setOutput((prev) => [
-      ...prev,
-      {
-        type: 'cmd',
-        text: (
-          <span>
-            <span className="text-green-400">user@jaredtaylor.dev</span>
-            <span className="text-white">:</span>
-            <span className="text-blue-400">{cwd}</span>
-            <span className="text-white">$ {input}</span>
-          </span>
-        ),
-      },
-      {
-        type: 'out',
-        text: <span className="blinking-cursor" />,
-      },
-    ]);
+    // Append the command line to output
+    const cmdEntry = {
+      type: 'cmd',
+      text: (
+        <span>
+          <span className="text-green-400">user@jaredtaylor.dev</span>
+          <span className="text-white">:</span>
+          <span className="text-blue-400">{cwd}</span>
+          <span className="text-white">$ {input}</span>
+        </span>
+      ),
+    };
 
-    let loadingIndex = null;
+    // Append blinking cursor placeholder
+    const placeholderIndex = output.length + 1;
+    setOutput((prev) => [...prev, cmdEntry, { type: 'out', text: <span className="blinking-cursor" /> }]);
 
     try {
       const result = await executeCommand(command, cwd, args);
-      const stdout = result.stdout || result.stderr || '(no output)';
-      const lines = stdout.split('\n');
+      const message = result.stdout || result.stderr || '(no output)';
+
+      // Type out message replacing the blinking cursor
+      await typeOutput(message, 'out', placeholderIndex);
       setCwd(result.cwd);
-
-      // Replace loading line with first animated line
-      let i = 0;
-
-      for (let line of lines) {
-        if (line.trim() === '') continue;
-
-        let current = '';
-        let lineIndex = null;
-
-        // On the first line, overwrite the loading placeholder
-        if (i === 0) {
-          lineIndex = output.length; // this line was the last appended
-          setOutput((prev) => {
-            const updated = [...prev];
-            updated[lineIndex] = { type: 'out', text: '' };
-            return updated;
-          });
-        } else {
-          setOutput((prev) => {
-            const updated = [...prev, { type: 'out', text: '' }];
-            lineIndex = updated.length - 1;
-            return updated;
-          });
-        }
-
-        await new Promise((resolve) => {
-          let j = 0;
-          const interval = setInterval(() => {
-            current += line[j++];
-            setOutput((prev) => {
-              const updated = [...prev];
-              updated[lineIndex] = { type: 'out', text: current };
-              return updated;
-            });
-
-            if (j >= line.length) {
-              clearInterval(interval);
-              resolve();
-            }
-          }, 10);
-        });
-
-        i++;
-      }
     } catch (err) {
       let msg = err.message;
       try {
         const json = JSON.parse(msg.replace('Server error: ', ''));
         msg = json.error || msg;
       } catch {}
-      setOutput((prev) => [...prev, { type: 'err', text: msg }]);
+      setOutput((prev) => {
+        const newOutput = [...prev];
+        newOutput[placeholderIndex] = { type: 'err', text: msg };
+        return newOutput;
+      });
     }
 
     setInput('');
@@ -141,48 +97,24 @@ const Terminal = () => {
 
   // Typing out commands
   const [isTyping, setIsTyping] = useState(false);
-  const typeOutput = (text, type = 'out') => {
-    return new Promise((resolve) => {
-      const lines = text.split('\n');
-      let lineIndex = 0;
-      let charIndex = 0;
+  const typeOutput = async (text, type, indexToReplace) => {
+    const lines = text.split('\n');
+    const delay = 5;
 
-      // First, add the first line to output (empty string)
-      setOutput((prev) => [...prev, { type, text: '' }]);
-
-      const typeChar = () => {
+    for (const line of lines) {
+      let currentLine = '';
+      for (let i = 0; i < line.length; i++) {
+        currentLine += line[i];
+        await new Promise((res) => setTimeout(res, delay));
         setOutput((prev) => {
           const updated = [...prev];
-          const currentLine = updated.length - 1;
-
-          // Append next character
-          updated[currentLine] = {
-            ...updated[currentLine],
-            text: updated[currentLine].text + lines[lineIndex][charIndex],
-          };
-
+          updated[indexToReplace] = { type, text: currentLine };
           return updated;
         });
-
-        charIndex++;
-
-        if (charIndex >= lines[lineIndex].length) {
-          lineIndex++;
-          charIndex = 0;
-
-          if (lineIndex < lines.length) {
-            // Add next line as a new output item
-            setOutput((prev) => [...prev, { type, text: '' }]);
-          } else {
-            return resolve(); // Done typing
-          }
-        }
-
-        setTimeout(typeChar, 10); // Adjust speed here
-      };
-
-      typeChar();
-    });
+      }
+      indexToReplace++;
+      setOutput((prev) => [...prev, { type, text: '' }]);
+    }
   };
 
   return (

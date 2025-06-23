@@ -8,7 +8,7 @@
 }
 
 .blinking-cursor::after {
-  content: '▌'; /* or use '_' or '|' for a different style */
+  content: '▌';
   animation: blink 1s step-start infinite;
 }
 

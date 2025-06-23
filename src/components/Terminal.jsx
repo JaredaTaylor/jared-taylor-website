@@ -48,6 +48,8 @@ const Terminal = () => {
     }
 
     setLoading(true);
+
+    // Append the user command line
     setOutput((prev) => [
       ...prev,
       {
@@ -65,10 +67,34 @@ const Terminal = () => {
 
     try {
       const result = await executeCommand(command, cwd, args);
-      const message = result.stdout || result.stderr || '(no output)';
-      setIsTyping(true);
-      await typeOutput(message, 'out');
-      setIsTyping(false);
+      const stdout = result.stdout || result.stderr || '(no output)';
+      const lines = stdout.split('\n');
+
+      for (let line of lines) {
+        if (line.trim() === '') continue;
+
+        let current = '';
+        let i = 0;
+
+        await new Promise((resolve) => {
+          const interval = setInterval(() => {
+            current += line[i++];
+            setOutput((prev) => [
+              ...prev.slice(0, -1),
+              { type: 'out', text: current },
+            ]);
+            if (i >= line.length) {
+              clearInterval(interval);
+              resolve();
+            }
+          }, 10); // Typing speed (ms per character)
+        });
+
+        // Add line break between lines
+        setOutput((prev) => [...prev, { type: 'out', text: '' }]);
+      }
+
+      setCwd(result.cwd);
     } catch (err) {
       let msg = err.message;
       try {

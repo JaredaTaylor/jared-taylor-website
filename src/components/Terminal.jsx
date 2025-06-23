@@ -65,11 +65,10 @@ const Terminal = () => {
 
     try {
       const result = await executeCommand(command, cwd, args);
-      setOutput((prev) => [
-        ...prev,
-        { type: 'out', text: result.stdout || result.stderr || '(no output)' },
-      ]);
-      setCwd(result.cwd);
+      const message = result.stdout || result.stderr || '(no output)';
+      setIsTyping(true);
+      await typeOutput(message, 'out');
+      setIsTyping(false);
     } catch (err) {
       let msg = err.message;
       try {
@@ -86,6 +85,45 @@ const Terminal = () => {
   // ✅ focus the input when the container is clicked
   const handleFocusClick = () => {
     inputRef.current?.focus();
+  };
+
+  // Typing out commands
+  const [isTyping, setIsTyping] = useState(false);
+  const typeOutput = (text, type = 'out') => {
+    return new Promise((resolve) => {
+      const lines = text.split('\n');
+      let currentLine = 0;
+      let currentChar = 0;
+
+      const appendNextChar = () => {
+        setOutput((prev) => {
+          const newOutput = [...prev];
+          if (!newOutput.length || typeof newOutput[newOutput.length - 1].text !== 'string') {
+            newOutput.push({ type, text: '' });
+          }
+
+          let updatedLine = newOutput.pop();
+          updatedLine.text += lines[currentLine][currentChar] || '';
+
+          newOutput.push(updatedLine);
+          return newOutput;
+        });
+
+        currentChar++;
+        if (currentChar < lines[currentLine].length) {
+          setTimeout(appendNextChar, 10); // speed per char
+        } else if (currentLine < lines.length - 1) {
+          currentChar = 0;
+          currentLine++;
+          setOutput((prev) => [...prev, { type, text: '' }]);
+          setTimeout(appendNextChar, 100); // pause between lines
+        } else {
+          resolve();
+        }
+      };
+
+      appendNextChar();
+    });
   };
 
   return (
@@ -124,7 +162,7 @@ const Terminal = () => {
           className="bg-black text-white outline-none flex-grow"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          disabled={loading}
+          disabled={loading || isTyping}
         />
       </form>
 

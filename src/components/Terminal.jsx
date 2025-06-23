@@ -101,7 +101,8 @@ const Terminal = () => {
     const lines = text.split('\n');
     const delay = 5;
 
-    for (const line of lines) {
+    for (let lineIdx = 0; lineIdx < lines.length; lineIdx++) {
+      const line = lines[lineIdx];
       let currentLine = '';
       for (let i = 0; i < line.length; i++) {
         currentLine += line[i];
@@ -112,8 +113,11 @@ const Terminal = () => {
           return updated;
         });
       }
-      indexToReplace++;
-      setOutput((prev) => [...prev, { type, text: '' }]);
+
+      if (lineIdx < lines.length - 1) {
+        indexToReplace++;
+        setOutput((prev) => [...prev, { type, text: '' }]);
+      }
     }
   };
 

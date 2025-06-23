@@ -91,24 +91,42 @@ const Terminal = () => {
   const [isTyping, setIsTyping] = useState(false);
   const typeOutput = (text, type = 'out') => {
     return new Promise((resolve) => {
-      let index = 0;
-      let buffer = '';
+      const lines = text.split('\n');
+      let lineIndex = 0;
+      let charIndex = 0;
+
+      // First, add the first line to output (empty string)
+      setOutput((prev) => [...prev, { type, text: '' }]);
 
       const typeChar = () => {
-        buffer += text[index];
+        setOutput((prev) => {
+          const updated = [...prev];
+          const currentLine = updated.length - 1;
 
-        if (text[index] === '\n' || index === text.length - 1) {
-          // Push complete line or last chunk
-          setOutput((prev) => [...prev, { type, text: buffer }]);
-          buffer = '';
+          // Append next character
+          updated[currentLine] = {
+            ...updated[currentLine],
+            text: updated[currentLine].text + lines[lineIndex][charIndex],
+          };
+
+          return updated;
+        });
+
+        charIndex++;
+
+        if (charIndex >= lines[lineIndex].length) {
+          lineIndex++;
+          charIndex = 0;
+
+          if (lineIndex < lines.length) {
+            // Add next line as a new output item
+            setOutput((prev) => [...prev, { type, text: '' }]);
+          } else {
+            return resolve(); // Done typing
+          }
         }
 
-        index++;
-        if (index < text.length) {
-          setTimeout(typeChar, 10); // adjust speed here
-        } else {
-          resolve();
-        }
+        setTimeout(typeChar, 10); // Adjust speed here
       };
 
       typeChar();

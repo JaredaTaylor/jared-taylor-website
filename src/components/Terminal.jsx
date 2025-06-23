@@ -63,38 +63,64 @@ const Terminal = () => {
           </span>
         ),
       },
+      {
+        type: 'out',
+        text: <span className="blinking-cursor" />,
+      },
     ]);
+
+    let loadingIndex = null;
 
     try {
       const result = await executeCommand(command, cwd, args);
       const stdout = result.stdout || result.stderr || '(no output)';
       const lines = stdout.split('\n');
+      setCwd(result.cwd);
+
+      // Replace loading line with first animated line
+      let i = 0;
 
       for (let line of lines) {
         if (line.trim() === '') continue;
 
         let current = '';
-        let i = 0;
+        let lineIndex = null;
+
+        // On the first line, overwrite the loading placeholder
+        if (i === 0) {
+          lineIndex = output.length; // this line was the last appended
+          setOutput((prev) => {
+            const updated = [...prev];
+            updated[lineIndex] = { type: 'out', text: '' };
+            return updated;
+          });
+        } else {
+          setOutput((prev) => {
+            const updated = [...prev, { type: 'out', text: '' }];
+            lineIndex = updated.length - 1;
+            return updated;
+          });
+        }
 
         await new Promise((resolve) => {
+          let j = 0;
           const interval = setInterval(() => {
-            current += line[i++];
-            setOutput((prev) => [
-              ...prev.slice(0, -1),
-              { type: 'out', text: current },
-            ]);
-            if (i >= line.length) {
+            current += line[j++];
+            setOutput((prev) => {
+              const updated = [...prev];
+              updated[lineIndex] = { type: 'out', text: current };
+              return updated;
+            });
+
+            if (j >= line.length) {
               clearInterval(interval);
               resolve();
             }
-          }, 10); // Typing speed (ms per character)
+          }, 10);
         });
 
-        // Add line break between lines
-        setOutput((prev) => [...prev, { type: 'out', text: '' }]);
+        i++;
       }
-
-      setCwd(result.cwd);
     } catch (err) {
       let msg = err.message;
       try {

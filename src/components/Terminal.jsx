@@ -103,45 +103,63 @@ const Terminal = () => {
   // Typing out commands
   const [isTyping, setIsTyping] = useState(false);
   const typeOutput = async (text, type, indexToReplace) => {
-    const lines = text.split('\n').filter((line, i, arr) => {
-      return !(i === arr.length - 1 && line === '');
-    });
+    const lines = text.split('\n');
+    const delay = 1;
 
-    const delay = 5;
+    let currentLine = '';
+    let outputLines = [];
 
     for (let lineIdx = 0; lineIdx < lines.length; lineIdx++) {
       const line = lines[lineIdx];
-
-      let currentLine = '';
-      let firstChar = true;
+      currentLine = '';
 
       for (let i = 0; i < line.length; i++) {
         currentLine += line[i];
-
         await new Promise((res) => setTimeout(res, delay));
 
         setOutput((prev) => {
           const updated = [...prev];
 
-          // First character replaces the blinking cursor element
-          if (firstChar) {
-            updated[indexToReplace] = { type, text: currentLine };
-            firstChar = false;
-          } else {
-            // Subsequent updates just modify the existing string
-            updated[indexToReplace] = { type, text: currentLine };
+          // Create typed lines so far
+          const typed = [...outputLines, { type, text: currentLine }];
+
+          // Fill remaining lines with empty string placeholders
+          while (typed.length <= indexToReplace + lineIdx) {
+            typed.push({ type, text: '' });
           }
+
+          // Apply typed lines to `updated`
+          for (let j = 0; j < typed.length; j++) {
+            updated[indexToReplace + j] = typed[j];
+          }
+
+          // Add blinking cursor to current line
+          updated[indexToReplace + lineIdx] = {
+            type,
+            text: (
+              <>
+                {currentLine}
+                <span className="blinking-cursor" />
+              </>
+            ),
+          };
 
           return updated;
         });
       }
 
-      // Add a new empty line for the next output, except on the last line
-      if (lineIdx < lines.length - 1) {
-        indexToReplace++;
-        setOutput((prev) => [...prev, { type, text: '' }]);
-      }
+      // After line is fully typed, add it to the record
+      outputLines.push({ type, text: currentLine });
     }
+
+    // Final cleanup: replace blinking cursor with final static text
+    setOutput((prev) => {
+      const updated = [...prev];
+      for (let i = 0; i < outputLines.length; i++) {
+        updated[indexToReplace + i] = outputLines[i];
+      }
+      return updated;
+    });
   };
 
   return (

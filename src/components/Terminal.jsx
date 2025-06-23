@@ -47,31 +47,36 @@ const Terminal = () => {
       return;
     }
 
-    // Show command prompt
-    setOutput((prev) => [
-      ...prev,
-      {
-        type: 'cmd',
-        text: (
-          <span>
-            <span className="text-green-400">user@jaredtaylor.dev</span>
-            <span className="text-white">:</span>
-            <span className="text-blue-400">{cwd}</span>
-            <span className="text-white">$ {input}</span>
-          </span>
-        ),
-      },
-      { type: 'out', text: '▋' }, // placeholder cursor line to replace
-    ]);
-
     setInput('');
     setLoading(true);
     setIsTyping(true);
 
+    // Dynamically compute the correct index after state update
+    let indexToReplace;
+
+    setOutput((prev) => {
+      const newOutput = [
+        ...prev,
+        {
+          type: 'cmd',
+          text: (
+            <span>
+              <span className="text-green-400">user@jaredtaylor.dev</span>
+              <span className="text-white">:</span>
+              <span className="text-blue-400">{cwd}</span>
+              <span className="text-white">$ {input}</span>
+            </span>
+          ),
+        },
+        { type: 'out', text: '▋' },
+      ];
+      indexToReplace = newOutput.length - 1; // correct position of '▋'
+      return newOutput;
+    });
+
     try {
       const result = await executeCommand(command, cwd, args);
       const message = result.stdout || result.stderr || 'Command failed...';
-      const indexToReplace = output.length + 1; // placeholder line index
       await typeOutput(message, 'out', indexToReplace);
       setCwd(result.cwd);
     } catch (err) {

@@ -110,6 +110,12 @@ const Terminal = () => {
 
     const delay = 5;
 
+    setOutput((prev) => {
+      const updated = [...prev];
+      updated[indexToReplace] = { type, text: '' };
+      return updated;
+    });
+
     for (let lineIdx = 0; lineIdx < lines.length; lineIdx++) {
       const line = lines[lineIdx];
       let currentLine = '';

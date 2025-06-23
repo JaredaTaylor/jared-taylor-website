@@ -104,32 +104,39 @@ const Terminal = () => {
   const [isTyping, setIsTyping] = useState(false);
   const typeOutput = async (text, type, indexToReplace) => {
     const lines = text.split('\n').filter((line, i, arr) => {
-      // Remove final empty line caused by trailing newline
       return !(i === arr.length - 1 && line === '');
     });
 
     const delay = 5;
 
-    setOutput((prev) => {
-      const updated = [...prev];
-      updated[indexToReplace] = { type, text: '' };
-      return updated;
-    });
-
     for (let lineIdx = 0; lineIdx < lines.length; lineIdx++) {
       const line = lines[lineIdx];
+
       let currentLine = '';
+      let firstChar = true;
+
       for (let i = 0; i < line.length; i++) {
         currentLine += line[i];
+
         await new Promise((res) => setTimeout(res, delay));
+
         setOutput((prev) => {
           const updated = [...prev];
-          updated[indexToReplace] = { type, text: currentLine };
+
+          // First character replaces the blinking cursor element
+          if (firstChar) {
+            updated[indexToReplace] = { type, text: currentLine };
+            firstChar = false;
+          } else {
+            // Subsequent updates just modify the existing string
+            updated[indexToReplace] = { type, text: currentLine };
+          }
+
           return updated;
         });
       }
 
-      // If not the last line, add a new one
+      // Add a new empty line for the next output, except on the last line
       if (lineIdx < lines.length - 1) {
         indexToReplace++;
         setOutput((prev) => [...prev, { type, text: '' }]);

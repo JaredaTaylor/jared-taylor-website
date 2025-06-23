@@ -106,25 +106,60 @@ const Terminal = () => {
     const lines = text.split('\n');
     const delay = 1;
 
+    let currentLine = '';
+    let outputLines = [];
+
     for (let lineIdx = 0; lineIdx < lines.length; lineIdx++) {
       const line = lines[lineIdx];
-      let currentLine = '';
+      currentLine = '';
+
       for (let i = 0; i < line.length; i++) {
         currentLine += line[i];
         await new Promise((res) => setTimeout(res, delay));
+
         setOutput((prev) => {
           const updated = [...prev];
-          updated[indexToReplace] = { type, text: currentLine };
+
+          // Create typed lines so far
+          const typed = [...outputLines, { type, text: currentLine }];
+
+          // Fill remaining lines with empty string placeholders
+          while (typed.length <= indexToReplace + lineIdx) {
+            typed.push({ type, text: '' });
+          }
+
+          // Apply typed lines to `updated`
+          for (let j = 0; j < typed.length; j++) {
+            updated[indexToReplace + j] = typed[j];
+          }
+
+          // Add blinking cursor to current line
+          updated[indexToReplace + lineIdx] = {
+            type,
+            text: (
+              <>
+                {currentLine}
+                <span className="blinking-cursor" />
+              </>
+            ),
+          };
+
           return updated;
         });
       }
 
-      // Only push a new empty line for the next line if not at the last one
-      if (lineIdx < lines.length - 1) {
-        indexToReplace++;
-        setOutput((prev) => [...prev, { type, text: '' }]);
-      }
+      // After line is fully typed, add it to the record
+      outputLines.push({ type, text: currentLine });
     }
+
+    // Final cleanup: replace blinking cursor with final static text
+    setOutput((prev) => {
+      const updated = [...prev];
+      for (let i = 0; i < outputLines.length; i++) {
+        updated[indexToReplace + i] = outputLines[i];
+      }
+      return updated;
+    });
   };
 
   return (
